@@ -2,25 +2,25 @@
 class Film {
   constructor(title, director, genre, year, userRating = 0, review = "", runtime, favorite = false) {
     this.title = title;
-    this.director = director;
+    this.director = director; 
     this.genre = genre;
-    this.year = year;
-    //for image, use the genre to set the relative path to the image
-    this.image = `resources/${genre.toLowerCase()}.png`;
+    this.year = year; 
+    //For image, use the genre to set the relative path to the corresponding icon
+    this.image = `resources/${genre.toLowerCase()}.png`; 
     // Generate a unique ID for the film object using Date.now()
     this.id = Date.now();
     // Generate a timestamp for the creation date using new Date().toISOString()
-    this.date = new Date().toISOString();
-    this.userRating = userRating;
-    this.review = review;
-    this.runtime = runtime;
-    this.favorite = favorite;
+    this.date = new Date().toISOString(); 
+    this.userRating = userRating; 
+    this.review = review; 
+    this.runtime = runtime; 
+    this.favorite = favorite; 
   }
 }
 
 // Set HTML elements to variables with DOM selection
-const form = document.getElementById("filmform");
-const filmlist = document.getElementById("filmlog");
+const form = document.getElementById("filmform"); 
+const filmlist = document.getElementById("filmlog"); 
 
 // Add an event listener to handle form submission and create a new film object using input
 form.addEventListener("submit", function(event) {
@@ -31,8 +31,7 @@ form.addEventListener("submit", function(event) {
   addFilm(form.elements.title.value, form.elements.director.value, form.elements.genre.value, form.elements.year.value, form.elements.rating.value, form.elements.review.value, form.elements.runtime.value, form.elements.favorite.checked);
 });
 
-
-// Function to display a film object as a list item
+// Function to display film objects as list items
 function displayFilm() {
   //Clear the filmlist <ul> element's contents
   filmlist.innerHTML = "";
@@ -66,11 +65,7 @@ function displayFilm() {
 
     // Create a delete button element
     let delButton = document.createElement("button");
-
-    // Create the text for the delete button
     let delButtonText = document.createTextNode("Delete");
-
-    // Add the text to the delete button
     delButton.appendChild(delButtonText);
 
     // Add the delete button to the list item
@@ -79,6 +74,7 @@ function displayFilm() {
     // Add an event listener to the delete button for the "click" event
     delButton.addEventListener("click", function(event) {
 
+      // Remove the intended film object from the filmLog array
       filmLog.forEach(function (film, filmIndex) {
         if (film.id == item.getAttribute("data-id")) {
           filmLog.splice(filmIndex, 1);
@@ -93,9 +89,9 @@ function displayFilm() {
     });
   });
 
-  };
+};
 
-// Function to add a new film object to the filmLog array and display it
+// Function to add a new film object to the filmLog array
 function addFilm(title, director, genre, year, userRating, review, runtime, favorite) {
   // Create a new film object using the provided parameters
   let film = new Film(title, director, genre, year, userRating, review, runtime, favorite);
@@ -107,13 +103,7 @@ function addFilm(title, director, genre, year, userRating, review, runtime, favo
   if (filmLog == null) {
     filmLog = [film];
   } else {
-    // Otherwise check to see if a film with the same ID already exists (just in case)
-    if (filmLog.find((element) => element.id === film.id)) {
-      console.log("Film ID already exists");
-    } else {
-      // If not, push the new task to the array
-      filmLog.push(film);
-    }
+    filmLog.push(film);
   }
   
   // Update localStorage with the array (converted to a JSON string)
