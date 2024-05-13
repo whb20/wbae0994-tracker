@@ -1,0 +1,11 @@
+{
+  "name": "wbae0994-tracker",
+  "version": "1.0.0",
+  "description": "William Bae Film Tracker Web App Prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "William Bae",
+  "license": "ISC"
+}
