@@ -26,24 +26,33 @@
       <label for="genre">Genre</label>
       <select id="genre" name="genre" required="true">
         <option value="Action">Action</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Animation">Animation</option>  
         <option value="Comedy">Comedy</option>
+        <option value="Crime">Crime</option>
+        <option value="Documentary">Documentary</option>
         <option value="Drama">Drama</option>
-        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Horror">Horror</option>
+        <option value="Musical">Musical</option>
+        <option value="Noir">Noir</option>
+        <option value="Romance">Romance</option>
+        <option value="Science Fiction">Science Fiction</option>
         <option value="Thriller">Thriller</option>
-        <option value="Other">Other</option>
-      </select>
+        <option value="Western">Western</option>
+      </select>      
     </div>
     <div class="form-row">
-      <label for="year">Year</label>
-      <input type="number" name="year" id="year" required="true" />
-    </div>
+        <label for="year">Release Year</label>
+        <input type="number" name="year" id="year" required="true" min="1800" max="2100" />
+      </div>
     <div class="form-row">
       <label for="image">Image URL</label>
       <input type="url" name="image" id="image" required="true" />
     </div>
     <div class="form-row">
       <label for="rating">Your Rating (1-10)</label>
-      <input type="number" name="rating" id="rating" min="1" max="10" required="true" />
+      <input type="range" id="rating" name="rating" min="1" max="10" value="5">
     </div>
     <div class="form-row">
       <label for="review">Review</label>
