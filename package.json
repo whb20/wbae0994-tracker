@@ -8,7 +8,6 @@
     "dev": "parcel build public/index.html && cp -R public/resources dist && parcel serve public/index.html "
   },
   "author": "William Bae",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
   },
