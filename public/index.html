@@ -1,19 +1,70 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Film Tracker</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to my website</h1>
-    </header>
-    <main>
-        <p>This is a basic HTML page with a header and paragraph.</p>
-    </main>
-    <footer>
-        <p>© 2022 My Website. All rights reserved.</p>
-    </footer>
+
+  <h1><a>Film Tracker</a></h1>
+
+  <form id="filmform">
+    <div class="form-row">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="director">Director</label>
+      <input type="text" name="director" id="director" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" required="true">
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="year">Year</label>
+      <input type="number" name="year" id="year" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="image">Image URL</label>
+      <input type="url" name="image" id="image" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="rating">Your Rating (1-10)</label>
+      <input type="number" name="rating" id="rating" min="1" max="10" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="review">Review</label>
+      <textarea name="review" id="review" rows="5" required="true"></textarea>
+    </div>
+    <div class="form-row">
+      <label for="runtime">Runtime (minutes)</label>
+      <input type="number" name="runtime" id="runtime" required="true" />
+    </div>
+    <div class="form-row">
+      <label for="favorite">Favorite</label>
+      <input type="checkbox" name="favorite" id="favorite">
+    </div>
+    <button type="submit">Submit Film</button>
+  </form>
+
+  <h2>Films</h2>
+    <ul id="filmLog">
+  </ul>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
