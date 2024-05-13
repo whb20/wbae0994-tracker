@@ -14,14 +14,13 @@ form.addEventListener("submit", function(event) {
   const director = form.elements.director.value;
   const genre = form.elements.genre.value;
   const year = form.elements.year.value;
-  const image = form.elements.image.value;
   const userRating = form.elements.rating.value;
   const review = form.elements.review.value;
   const runtime = form.elements.runtime.value;
   const favorite = form.elements.favorite.checked;
 
   // Create a new film object using the extracted values and call the addFilm function
-  addFilm(title, director, genre, year, image, userRating, review, runtime, favorite);
+  addFilm(title, director, genre, year, userRating, review, runtime, favorite);
 
   // Log the current state of the filmLog array to the console for debugging purposes
   console.log(filmLog);
@@ -36,8 +35,13 @@ function displayFilm(film) {
   item.setAttribute("data-id", film.id);
 
   // Create the HTML content for the list item using template literals
-  item.innerHTML = `
-    <p><strong>${film.title}</strong><br>${film.genre}</p>
+  item.innerHTML = `<div class="film-item">
+  <img src="${film.image}" alt="resources/horror.png">
+  <div class="film-info">
+    <h2>${film.title}</h2>
+    <p>${film.genre}</p>
+  </div>
+  </div>
   `;
 
   // Add the list item to the film list element
@@ -73,12 +77,13 @@ function displayFilm(film) {
 
 // Class representing a film object
 class Film {
-  constructor(title, director, genre, year, image, userRating = 0, review = "", runtime, favorite = false) {
+  constructor(title, director, genre, year, userRating = 0, review = "", runtime, favorite = false) {
     this.title = title;
     this.director = director;
     this.genre = genre;
     this.year = year;
-    this.image = image;
+    //for image, use the genre to set the relative path to the image
+    this.image = `resources/${genre.toLowerCase()}.png`;
     // Generate a unique ID for the film object using Date.now()
     this.id = Date.now();
     // Generate a timestamp for the creation date using new Date().toISOString()
@@ -94,9 +99,9 @@ class Film {
 let filmLog = [];
 
 // Function to add a new film object to the filmLog array and display it
-function addFilm(title, director, genre, year, image, userRating, review, runtime, favorite) {
+function addFilm(title, director, genre, year, userRating, review, runtime, favorite) {
   // Create a new film object using the provided parameters
-  let film = new Film(title, director, genre, year, image, userRating, review, runtime, favorite);
+  let film = new Film(title, director, genre, year, userRating, review, runtime, favorite);
 
   // Add the new film object to the filmLog array
   filmLog.push(film);
