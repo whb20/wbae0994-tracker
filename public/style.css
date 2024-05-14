@@ -10,6 +10,27 @@ h1 {
   margin: 20px 0;
 }
 
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#toggleFormButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+#toggleFormButton:hover {
+  background-color: #0056b3;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -23,7 +44,6 @@ form {
   border: 1px solid #ccc;
   border-radius: 10px;
 }
-
 
 .form-row {
   display: flex;
@@ -57,6 +77,7 @@ form button {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
 }
 
 form button:hover {
@@ -120,6 +141,7 @@ li {
 }
 
 .film-info h2 {
+  text-align: left;
   margin: 0 0 10px 0;
 }
 

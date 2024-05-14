@@ -21,6 +21,7 @@ class Film {
 // Set HTML elements to variables with DOM selection
 const form = document.getElementById("filmform"); 
 const filmlist = document.getElementById("filmlog"); 
+const toggleFormButton = document.getElementById('toggleFormButton');
 
 // Add an event listener to handle form submission and create a new film object using input
 form.addEventListener("submit", function(event) {
@@ -29,6 +30,14 @@ form.addEventListener("submit", function(event) {
 
   // Call the addFilm function, creating a new film object using the extracted values from the form
   addFilm(form.elements.title.value, form.elements.director.value, form.elements.genre.value, form.elements.year.value, form.elements.rating.value, form.elements.review.value, form.elements.runtime.value, form.elements.favorite.checked);
+
+  // Hide the form after submission
+  form.style.display = 'none'; 
+  toggleFormButton.textContent = 'Add New Film';
+
+  //Reload the page
+  location.reload();
+  
 });
 
 // Function to display film objects as list items
@@ -115,6 +124,8 @@ function addFilm(title, director, genre, year, userRating, review, runtime, favo
   // Update localStorage with the array (converted to a JSON string)
   localStorage.setItem("log", JSON.stringify(filmLog));
 
+  //Sort films by date
+  sortFilms("date");
   // Display the films on the DOM
   displayFilm();
 }
@@ -173,6 +184,16 @@ function sortFilms(attribute) {
   // Display the films on the DOM
   displayFilm();
 }
+
+  toggleFormButton.addEventListener('click', () => {
+    if (form.style.display === 'none' || form.style.display === '') {
+      form.style.display = 'block';
+      toggleFormButton.textContent = 'Hide Form';
+    } else {
+      form.style.display = 'none';
+      toggleFormButton.textContent = 'Add New Film';
+    }
+  });
 
 // Display the films on the DOM (sorted by Date Added) when the page loads
 sortFilms("date");
