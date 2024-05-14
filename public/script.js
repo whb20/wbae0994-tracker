@@ -61,21 +61,27 @@ function displayFilm() {
 
     // Create the HTML content for the list item using template literals
     item.innerHTML = 
-    `<div class="film-item">
-      <img src="${film.image}" alt="${film.genre} icon">
-      <div class="film-info">
-        <h2>${film.title}</h2>
+    `<div class="film-item" data-id="${film.id}">
+      <div class="film-summary">
+        <img src="${film.image}" alt="${film.genre} icon" class="film-image">
+        <h2 class="film-title">${film.title}</h2>
+        <p class="user-rating">User Rating: ${film.userRating}</p>
+        <p class="favorite">Favorite: ${film.favorite ? "Yes" : "No"}</p>
+        <button class="delete-button">Delete</button>
+      </div>
+      <div class="film-details" style="display: none;">
         <p><strong>Director:</strong> ${film.director}</p>
         <p><strong>Genre:</strong> ${film.genre}</p>
         <p><strong>Year:</strong> ${film.year}</p>
-        <p><strong>Rating:</strong> ${film.userRating}</p>
-        <p><strong>Review:</strong> ${film.review}</p>
         <p><strong>Runtime:</strong> ${film.runtime} minutes</p>
-        <p><strong>Favorite:</strong> ${film.favorite ? "Yes" : "No"}</p>
-        <p><strong>Date Added:</strong> ${new Date(film.date).toLocaleDateString()}</p>
-      </div>
-      <button class="delete-button">Delete</button>
-    </div>`;
+        <p><strong>Review:</strong> ${film.review}</p>
+      </div>`;
+
+    // Add click event listener to toggle display of additional details
+    item.querySelector('.film-item').addEventListener('click', () => {
+      const detailsContainer = item.querySelector('.film-details');
+      detailsContainer.style.display = detailsContainer.style.display === 'none' ? 'block' : 'none';
+    });
 
     // Add the list item to the film list element
     filmlist.appendChild(item);
@@ -188,7 +194,7 @@ function sortFilms(attribute) {
   toggleFormButton.addEventListener('click', () => {
     if (form.style.display === 'none' || form.style.display === '') {
       form.style.display = 'block';
-      toggleFormButton.textContent = 'Hide Form';
+      toggleFormButton.textContent = 'Cancel';
     } else {
       form.style.display = 'none';
       toggleFormButton.textContent = 'Add New Film';
