@@ -39,6 +39,9 @@ function displayFilm() {
   // Fetch and parse filmLog array from localStorage
   let filmLog = JSON.parse(localStorage.getItem("log"));
 
+  // If no films are logged, return to avoid errors
+  if (!filmLog) return;
+
   //Loop through the filmLog array and display each film object
   filmLog.forEach(film => {
     // Create a new list item element (LI)
@@ -48,14 +51,22 @@ function displayFilm() {
     item.setAttribute("data-id", film.id);
 
     // Create the HTML content for the list item using template literals
-    item.innerHTML = `<div class="film-item">
-      <img src="${film.image}" alt="?">
+    item.innerHTML = 
+    `<div class="film-item">
+      <img src="${film.image}" alt="${film.genre} icon">
       <div class="film-info">
         <h2>${film.title}</h2>
-        <p>${film.genre}</p>
+        <p><strong>Director:</strong> ${film.director}</p>
+        <p><strong>Genre:</strong> ${film.genre}</p>
+        <p><strong>Year:</strong> ${film.year}</p>
+        <p><strong>Rating:</strong> ${film.userRating}</p>
+        <p><strong>Review:</strong> ${film.review}</p>
+        <p><strong>Runtime:</strong> ${film.runtime} minutes</p>
+        <p><strong>Favorite:</strong> ${film.favorite ? "Yes" : "No"}</p>
+        <p><strong>Date Added:</strong> ${new Date(film.date).toLocaleDateString()}</p>
       </div>
-      </div>
-    `;
+      <button class="delete-button">Delete</button>
+    </div>`;
 
     // Add the list item to the film list element
     filmlist.appendChild(item);
@@ -63,13 +74,8 @@ function displayFilm() {
     //Clear the input values of submission form
     form.reset();
 
-    // Create a delete button element
-    let delButton = document.createElement("button");
-    let delButtonText = document.createTextNode("Delete");
-    delButton.appendChild(delButtonText);
-
-    // Add the delete button to the list item
-    item.appendChild(delButton);
+    // Select the delete button within the film item
+    let delButton = item.querySelector(".delete-button");
 
     // Add an event listener to the delete button for the "click" event
     delButton.addEventListener("click", function(event) {
@@ -88,8 +94,8 @@ function displayFilm() {
       item.remove();
     });
   });
-
 };
+
 
 // Function to add a new film object to the filmLog array
 function addFilm(title, director, genre, year, userRating, review, runtime, favorite) {
@@ -113,5 +119,61 @@ function addFilm(title, director, genre, year, userRating, review, runtime, favo
   displayFilm();
 }
 
-// Call the displayFilm function when the page loads
+// Function to sort films based on a given attribute
+function sortFilms(attribute) {
+  // Fetch and parse filmLog array from localStorage
+  let filmLog = JSON.parse(localStorage.getItem("log"));
+
+  // If no films are logged, return to avoid errors
+  if (!filmLog) return;
+
+  // Sort the filmLog array based on the provided attribute
+  filmLog.sort((a, b) => {
+    if (attribute === "favorite") {
+      console.log("sort by favorite");
+      return (a.favorite === b.favorite)? 0 : a.favorite? -1 : 1;
+    }
+
+    if (attribute === "userRating"){
+      // Convert attribute values to numbers for numeric attributes
+      const aValue = typeof a[attribute] === 'string' ? parseFloat(a[attribute]) : a[attribute];
+      const bValue = typeof b[attribute] === 'string' ? parseFloat(b[attribute]) : b[attribute];
+
+      if (aValue < bValue) {
+        return 1;
+      } else if (aValue > bValue) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+
+    if (attribute === "date" || attribute === "year"){
+      if (a[attribute] < b[attribute]) {
+        return 1;
+      } else if (a[attribute] > b[attribute]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+
+    if (a[attribute] > b[attribute]) {
+      return 1;
+    } else if (a[attribute] < b[attribute]) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  // Update localStorage with the sorted array
+  localStorage.setItem("log", JSON.stringify(filmLog));
+
+  // Display the films on the DOM
+  displayFilm();
+}
+
+// Display the films on the DOM (sorted by Date Added) when the page loads
+sortFilms("date");
 displayFilm();
