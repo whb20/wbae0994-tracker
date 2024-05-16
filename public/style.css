@@ -1,11 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #2C3E50;
   margin: 0;
   padding: 0;
 }
 
 h1 {
+  color: #3498DB;
   text-align: center;
   margin: 20px 0;
 }
@@ -19,7 +20,7 @@ h1 {
 #toggleFormButton {
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
+  background-color: #3498DB;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -39,7 +40,7 @@ form {
   margin: 20px auto; /* Auto margin for centering */
   width: 90%;
   max-width: 800px;
-  background-color: white;
+  background-color: #e1e1e1;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -85,18 +86,17 @@ form button:hover {
 }
 
 h2 {
+  color: #3498DB;
   text-align: center;
   margin: 20px 0;
+  border-top: 1px solid #3498DB;
+  padding-top: 20px;
 }
 
 #sort-options {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-}
-
-#sort-options label {
-  margin-right: 10px;
 }
 
 #sort-options select {
@@ -111,7 +111,7 @@ ul {
 }
 
 li {
-  background-color: white;
+  background-color: #e1e1e1;
   margin: 10px auto;
   padding: 10px;
   width: 90%;
@@ -144,6 +144,9 @@ li {
 
 .film-summary h2 {
   width: 33%;
+  color: black;
+  border-top: none;
+  padding-top: none;
 }
 
 .film-summary p {
@@ -186,7 +189,7 @@ li {
     margin: 20px auto; /* Auto margin for centering */
     width: 90%;
     max-width: 800px;
-    background-color: white;
+    background-color: #ECF0F1;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;

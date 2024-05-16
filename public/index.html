@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Film Tracker</title>
+  <title>FilmTrackr: movie tracking app</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-  <h1><a>Film Tracker</a></h1>
+  <h1><a>&#127909 FilmTrackr</a></h1>
 
   <div id="button-container">
     <button id="toggleFormButton">Add New Film</button>
@@ -53,7 +53,7 @@
     </div>
     <div class="form-row">
       <label for="review">Review</label>
-      <textarea name="review" id="review" rows="5" required="true"></textarea>
+      <textarea name="review" id="review" rows="5" required="false"></textarea>
     </div>
     <div class="form-row">
       <label for="favorite">Favorite</label>
@@ -66,7 +66,6 @@
 
   <h2>Your Movies</h2>
   <div id="sort-options">
-    <label for="sort-select">Sort by: </label>
     <select id="sort-select" onchange="sortFilms(this.value)">
       <option value="date">Recently Added</option>
       <option value="title">Title (A-Z)</option>
@@ -75,7 +74,7 @@
       <option value="genre">Genre (A-Z)</option>
       <option value="userRating">Highest Rated</option>
       <option value="runtime">Runtime</option>
-      <option value="favorite">Favorite</option>
+      <option value="favorite">Favorites</option>
     </select>
   </div>
 
