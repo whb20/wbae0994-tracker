@@ -143,7 +143,7 @@ li {
 }
 
 .film-summary h2 {
-  width: 400px;
+  width: 33%;
 }
 
 .film-summary p {
@@ -152,12 +152,12 @@ li {
 
 .film-details {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping */
+  flex-wrap: wrap; 
 }
 
 .film-details p {
   margin: 0;
-  display: inline-block; /* Display the <p> elements inline */
+  display: inline-block; 
   margin-left: 200px;
   margin-bottom: 20px;
 }
@@ -173,4 +173,34 @@ li {
 
 .delete-button:hover {
   background-color: #c9302c;
+}
+
+
+/* Fix some formatting when the screen is smaller */
+@media screen and (max-width: 1200px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    margin: 20px auto; /* Auto margin for centering */
+    width: 90%;
+    max-width: 800px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .film-details p {
+    margin-left: 75px; /* Reset the left margin */
+    display: block; /* Display the <p> elements as block */
+  }
 }

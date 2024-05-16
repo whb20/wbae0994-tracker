@@ -23,6 +23,17 @@ const form = document.getElementById("filmform");
 const filmlist = document.getElementById("filmlog"); 
 const toggleFormButton = document.getElementById('toggleFormButton');
 
+// Add an event listener to the toggle form button to show/hide the form
+toggleFormButton.addEventListener('click', () => {
+  if (form.style.display === 'none' || form.style.display === '') {
+    form.style.display = 'block';
+    toggleFormButton.textContent = 'Cancel';
+  } else {
+    form.style.display = 'none';
+    toggleFormButton.textContent = 'Add New Film';
+  }
+});
+
 // Add an event listener to handle form submission and create a new film object using input
 form.addEventListener("submit", function(event) {
   // Prevent the default form submission behavior (reloading the page)
@@ -40,7 +51,7 @@ form.addEventListener("submit", function(event) {
   
 });
 
-// Function to display film objects as list items
+// Default (desktop) function to display film objects as list items
 function displayFilm() {
   //Clear the filmlist <ul> element's contents
   filmlist.innerHTML = "";
@@ -65,8 +76,8 @@ function displayFilm() {
       <div class="film-summary">
         <img src="${film.image}" alt="${film.genre} icon" class="film-image">
         <h2 class="film-title">${film.title}</h2>
-        <p class="user-rating">User Rating: ${film.userRating}</p>
-        <p class="favorite">Favorite: ${film.favorite ? "Yes" : "No"}</p>
+        <p class="user-rating"><span style='font-size: 3em;'>${getStarRating(film.userRating)}</span></p>
+        <p class="favorite">${film.favorite ? "<span style='font-size: 4em;'>&#x2665;</span>" : ""}</p>
         <button class="delete-button">Delete</button>
       </div>
       <div class="film-details" style="display: none;">
@@ -111,6 +122,52 @@ function displayFilm() {
   });
 };
 
+// Modified function to display film objects as list items for mobile view
+function displayFilmMobile() {
+  filmlist.innerHTML = "";
+  let filmLog = JSON.parse(localStorage.getItem("log"));
+  if (!filmLog) return;
+
+  filmLog.forEach(film => {
+    let item = document.createElement("li");
+    item.setAttribute("data-id", film.id);
+    item.innerHTML = 
+    `<div class="film-item" data-id="${film.id}" style="font-size: 0.5em;">
+      <div class="film-summary">
+        <img src="${film.image}" alt="${film.genre} icon" class="film-image" style="width: 50px; height: 50px;">
+        <h2 class="film-title">${film.title}</h2>
+        <p class="user-rating" style="margin-top: 22px;">Rating: ${film.userRating}</p>
+        <p class="favorite">${film.favorite ? "<span style='font-size: 4em;'>&#x2665;</span>" : ""}</p>
+        <button class="delete-button">Delete</button>
+      </div>
+      <div class="film-details" style="display: none;">
+        <p><strong>Director:</strong> ${film.director}</p>
+        <p><strong>Genre:</strong> ${film.genre}</p>
+        <p><strong>Year:</strong> ${film.year}</p>
+        <p><strong>Runtime:</strong> ${film.runtime} minutes</p>
+        <p><strong>Review:</strong> ${film.review}</p>
+      </div>`;
+
+    item.querySelector('.film-item').addEventListener('click', () => {
+      const detailsContainer = item.querySelector('.film-details');
+      detailsContainer.style.display = detailsContainer.style.display === 'none' ? 'block' : 'none';
+    });
+
+    filmlist.appendChild(item);
+    form.reset();
+    let delButton = item.querySelector(".delete-button");
+    delButton.addEventListener("click", function(event) {
+      filmLog.forEach(function (film, filmIndex) {
+        if (film.id == item.getAttribute("data-id")) {
+          filmLog.splice(filmIndex, 1);
+        }
+      });
+      localStorage.setItem("log", JSON.stringify(filmLog));
+      item.remove();
+    });
+  });
+}
+
 
 // Function to add a new film object to the filmLog array
 function addFilm(title, director, genre, year, userRating, review, runtime, favorite) {
@@ -133,7 +190,7 @@ function addFilm(title, director, genre, year, userRating, review, runtime, favo
   //Sort films by date
   sortFilms("date");
   // Display the films on the DOM
-  displayFilm();
+  updateDisplay();
 }
 
 // Function to sort films based on a given attribute
@@ -146,11 +203,14 @@ function sortFilms(attribute) {
 
   // Sort the filmLog array based on the provided attribute
   filmLog.sort((a, b) => {
+
+    // Favorites should be sorted to the top
     if (attribute === "favorite") {
       console.log("sort by favorite");
       return (a.favorite === b.favorite)? 0 : a.favorite? -1 : 1;
     }
 
+    // User rating should be sorted in descending order
     if (attribute === "userRating"){
       // Convert attribute values to numbers for numeric attributes
       const aValue = typeof a[attribute] === 'string' ? parseFloat(a[attribute]) : a[attribute];
@@ -165,6 +225,7 @@ function sortFilms(attribute) {
       }
     }
 
+    // Date and Release Year should be sorted with the most recent first
     if (attribute === "date" || attribute === "year"){
       if (a[attribute] < b[attribute]) {
         return 1;
@@ -175,6 +236,7 @@ function sortFilms(attribute) {
       }
     }
 
+    // All other attributes should be sorted in ascending order
     if (a[attribute] > b[attribute]) {
       return 1;
     } else if (a[attribute] < b[attribute]) {
@@ -188,19 +250,33 @@ function sortFilms(attribute) {
   localStorage.setItem("log", JSON.stringify(filmLog));
 
   // Display the films on the DOM
-  displayFilm();
+  updateDisplay();
 }
 
-  toggleFormButton.addEventListener('click', () => {
-    if (form.style.display === 'none' || form.style.display === '') {
-      form.style.display = 'block';
-      toggleFormButton.textContent = 'Cancel';
-    } else {
-      form.style.display = 'none';
-      toggleFormButton.textContent = 'Add New Film';
-    }
-  });
+//Function that returns string of Star Rating based on the userRating
+function getStarRating(rating) {
+  const maxStars = 10;
+  let stars = '';
+  for (let i = 1; i <= maxStars; i++) {
+    stars += i <= rating ? '★' : '☆';
+  }
+  return stars;
+}
+
+
+// Function to choose the correct display function based on screen width
+function updateDisplay() {
+  if (window.matchMedia("(max-width: 1200px)").matches) {
+    displayFilmMobile();
+  } else {
+    displayFilm();
+  }
+}
+
+// Add event listener to call updateDisplay on window resize
+window.addEventListener('resize', updateDisplay);
+
 
 // Display the films on the DOM (sorted by Date Added) when the page loads
 sortFilms("date");
-displayFilm();
+updateDisplay();
