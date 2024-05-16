@@ -146,7 +146,7 @@ li {
   width: 33%;
   color: black;
   border-top: none;
-  padding-top: none;
+  padding-top: 20px;
 }
 
 .film-summary p {
@@ -205,5 +205,12 @@ li {
   .film-details p {
     margin-left: 75px; /* Reset the left margin */
     display: block; /* Display the <p> elements as block */
+  }
+
+  .film-summary h2 {
+    width: 33%;
+    color: black;
+    border-top: none;
+    padding-top: 0px;
   }
 }

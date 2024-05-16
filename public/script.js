@@ -136,7 +136,7 @@ function displayFilmMobile() {
       <div class="film-summary">
         <img src="${film.image}" alt="${film.genre} icon" class="film-image" style="width: 50px; height: 50px;">
         <h2 class="film-title">${film.title}</h2>
-        <p class="user-rating" style="margin-top: 22px;">Rating: ${film.userRating}</p>
+        <p class="user-rating" style="margin-top: 22px; margin-left: 10px"> ★${film.userRating}</p>
         <p class="favorite">${film.favorite ? "<span style='font-size: 4em;'>&#x2665;</span>" : ""}</p>
         <button class="delete-button">Delete</button>
       </div>
