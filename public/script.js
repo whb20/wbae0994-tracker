@@ -76,8 +76,8 @@ function displayFilm() {
       <div class="film-summary">
         <img src="${film.image}" alt="${film.genre} icon" class="film-image">
         <h2 class="film-title">${film.title}</h2>
-        <p class="user-rating"><span style='font-size: 3em;'>${getStarRating(film.userRating)}</span></p>
-        <p class="favorite">${film.favorite ? "<span style='font-size: 4em;'>&#x2665;</span>" : ""}</p>
+        <p class="user-rating"><span style='font-size: 1.5em;'>${getStarRating(film.userRating)}</span></p>
+        <p class="favorite">${film.favorite ? "<span style='font-size: 2.5em;'>&#x2665;</span>" : ""}</p>
         <button class="delete-button">Delete</button>
       </div>
       <div class="film-details" style="display: none;">
@@ -136,7 +136,7 @@ function displayFilmMobile() {
       <div class="film-summary">
         <img src="${film.image}" alt="${film.genre} icon" class="film-image" style="width: 50px; height: 50px;">
         <h2 class="film-title">${film.title}</h2>
-        <p class="user-rating" style="margin-top: 22px; margin-left: 10px"> ★${film.userRating}</p>
+        <p class="user-rating" style="font-size: 1.5em; margin-top: 20px; margin-left: 10px"> ★${film.userRating}</p>
         <p class="favorite">${film.favorite ? "<span style='font-size: 4em;'>&#x2665;</span>" : ""}</p>
         <button class="delete-button">Delete</button>
       </div>

@@ -13,7 +13,7 @@
 * To configure/run on a local machine, install Parcel and then use the command "npm run dev" in the terminal within the root directory to set up the local server. The application can then be accessed at http://localhost:1234.
 
 ## NOTES
-* The web app was developed for Desktop (1440x900) and Mobile (390x844) and will appear formatted best at those window sizes, but the design is responsive and it should work at any window size.
+* The web app was developed for Desktop (1440x900) and Mobile (390x844) and will appear formatted best at those window sizes. Certain other window sizings may cause formatting problems.
 
 ## FURTHER WORK
 * Users should eventually be able to edit the information for their films

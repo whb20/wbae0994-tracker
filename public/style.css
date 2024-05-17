@@ -48,13 +48,14 @@ form {
 
 .form-row {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 
-.form-row label {
-  width: 100px;
+.form-row label{
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .form-row input,
@@ -69,6 +70,10 @@ form {
 
 .form-row textarea {
   resize: vertical;
+}
+
+.fav{
+  margin: 10px;
 }
 
 form button {
@@ -105,9 +110,14 @@ h2 {
   border-radius: 5px;
 }
 
+@media screen and (min-width: 1201px) {
+
 ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
   list-style-type: none;
   padding: 0;
+
 }
 
 li {
@@ -153,16 +163,28 @@ li {
   flex-grow: 1;
 }
 
+.film-summary .user-rating{
+  padding-top: 20px;
+}
+
+.film-summary .favorite{
+  padding-top: 15px;
+}
+
 .film-details {
   display: flex;
   flex-wrap: wrap; 
+  text-wrap: wrap;
+  width: 700px;
 }
 
 .film-details p {
   margin: 0;
   display: inline-block; 
-  margin-left: 200px;
+  margin-left: 100px;
   margin-bottom: 20px;
+}
+
 }
 
 .delete-button {
@@ -181,26 +203,6 @@ li {
 
 /* Fix some formatting when the screen is smaller */
 @media screen and (max-width: 1200px) {
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    margin: 20px auto; /* Auto margin for centering */
-    width: 90%;
-    max-width: 800px;
-    background-color: #ECF0F1;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-
-  .form-row {
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
 
   .film-details p {
     margin-left: 75px; /* Reset the left margin */
@@ -212,5 +214,51 @@ li {
     color: black;
     border-top: none;
     padding-top: 0px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #e1e1e1;
+    margin: 10px auto;
+    padding: 10px;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .film-item {
+    display: flex;
+    align-items: left;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .film-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  .film-summary {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+  }
+  
+  .film-summary p {
+    flex-grow: 1;
+  }
+  
+  .film-details {
+    display: flex;
+    flex-wrap: wrap; 
   }
 }

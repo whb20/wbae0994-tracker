@@ -18,13 +18,13 @@
 
   <form id="filmform" style="display: none;">
     <div class="form-row">
-      <label for="title">Title</label>
+      <label for="title">Title:</label>
       <input type="text" name="title" id="title" required="true" />
-      <label for="director">Director</label>
+      <label for="director">Director:</label>
       <input type="text" name="director" id="director" required="true" />
     </div>
     <div class="form-row">
-      <label for="genre">Genre</label>
+      <label for="genre">Genre:</label>
       <select id="genre" name="genre" required="true">
         <option value="Action">Action</option>
         <option value="Adventure">Adventure</option>
@@ -42,21 +42,21 @@
         <option value="Thriller">Thriller</option>
         <option value="Western">Western</option>
       </select> 
-      <label for="year">Release Year</label>
+      <label for="year">Release Year:</label>
       <input type="number" name="year" id="year" required="true" min="1800" max="2100" />
     </div>
     <div class="form-row">
-      <label for="rating">Your Rating (1-10)</label>
+      <label for="rating">Your Rating (1-10):</label>
       <input type="number" name="rating" id="rating" min="1" max="10" required="true" />
-      <label for="runtime">Runtime (minutes)</label>
+      <label for="runtime">Runtime (minutes):</label>
       <input type="number" name="runtime" id="runtime" required="true" />
     </div>
     <div class="form-row">
-      <label for="review">Review</label>
+      <label for="review">Review:</label>
       <textarea name="review" id="review" rows="5" required="false"></textarea>
     </div>
-    <div class="form-row">
-      <label for="favorite">Favorite</label>
+    <div class="fav">
+      <label for="favorite">Favorite</label> 
       <input type="checkbox" name="favorite" id="favorite">
     </div>
     <div class="form-row">
